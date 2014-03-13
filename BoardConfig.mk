@@ -19,7 +19,7 @@
 -include device/sony/qcom-common/BoardConfigCommon.mk
 
 # inherit from the proprietary version
--include vendor/sony/huashan/BoardConfigVendor.mk
+#-include vendor/sony/huashan/BoardConfigVendor.mk
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := C5302,C5303,C5306,huashan
@@ -31,6 +31,7 @@ TARGET_KERNEL_SOURCE := kernel/sony/msm8960t
 TARGET_KERNEL_CONFIG := cm_viskan_huashan_defconfig
 
 # Platform
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno320
 TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 TARGET_BOARD_PLATFORM := msm8960
 BOARD_VENDOR_PLATFORM := viskan
@@ -82,9 +83,14 @@ COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_CAMERA_ABI_HACK -DMR0_CAMERA_BLOB
 # Use retire fence from MDP driver 
 #TARGET_DISPLAY_USE_RETIRE_FENCE := true
 
+# Kernel handles input boosting
+TARGET_POWERHAL_NO_TOUCH_BOOST := true
+
 # GPS
-BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
-TARGET_NO_RPC := true
+TARGET_PROVIDES_GPS_LOC_API := true
+
+# Time
+BOARD_USES_QC_TIME_SERVICES := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH_QCOM := true
@@ -111,6 +117,7 @@ BOARD_HAVE_NFC := true
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
+BOARD_USES_LEGACY_ALSA_AUDIO := true
 TARGET_USES_QCOM_MM_AUDIO := true
 TARGET_LS_USE_ALS_NODE := true
 

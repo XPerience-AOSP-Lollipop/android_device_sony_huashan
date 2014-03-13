@@ -16,8 +16,54 @@ ro.semc.product.device=C53
 
 # Graphics
 ro.sf.lcd_density=320
+ro.hwui.text_cache_width=2048
 
+# System prop for HDMI screen rotation lock
+persist.demo.hdmirotationlock=true
+
+# Audio
+persist.audio.fluence.mode=endfire
+persist.audio.vr.enable=false
+persist.audio.handset.mic=digital
+persist.audio.lowlatency.rec=false
+af.resampler.quality=255
+mpq.audio.decode=true
+
+# Enable AAC 5.1 output
+media.aac_51_output_enabled=true
+
+#system props for the MM modules
+media.stagefright.enable-player=true
+media.stagefright.enable-http=true
+media.stagefright.enable-aac=true
+media.stagefright.enable-qcp=true
+media.stagefright.enable-fma2dp=true
+media.stagefright.enable-scan=true
+mmp.enable.3g2=true
+#33395 is sum of supported format flags in AAL
+#Formats: AVI AC3 ASF AAC QCP DTS 3G2
+mm.enable.qcom_parser=33395
+encoder.video.profile=high
+
+# RIL
+ro.telephony.call_ring.multiple=0
+ro.ril.transmitpower=true
+telephony.lteOnCdmaDevice=0
+ro.telephony.default_network=0
+
+# Netmgrd
 ro.use_data_netmgrd=true
+persist.rmnet.mux=disabled
+
+# BT
+ro.qualcomm.bt.hci_transport=smd
+
+# snapdragon value add features
+ro.qc.sdk.audio.ssr=false
+ro.qc.sdk.audio.fluencetype=none
+ro.qc.sdk.camera.facialproc=true
+ro.qc.sdk.gestures.camera=false
+ro.qc.sdk.sensors.gestures=false
 
 # NFC
 ro.nfc.on.default=true
@@ -27,8 +73,13 @@ ro.nfc.icon.enable=false
 ro.nfc.vendor.name=nxp
 ro.nfc.limitation.camera=false
 
-# System props for telephony
-# System prop to turn off CdmaLTEPhone always
-telephony.lteOnCdmaDevice=0
-# start in GSM/WCDMA (WCDMA preferred)
-ro.telephony.default_network=0
+# GPS
+#ro.qc.sdk.izat.premium_enabled=0
+#ro.qc.sdk.izat.service_mask=0x4
+#persist.gps.qc_nlp_in_use=0
+#ro.gps.agps_provider=1
+persist.gps.qmienabled=true
+
+# stirctmode
+persist.sys.strictmode.visual=0
+persist.sys.strictmode.disable=1

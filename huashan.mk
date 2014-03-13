@@ -70,6 +70,7 @@ PRODUCT_COPY_FILES += \
 
 # Vold
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/fstab:root/fstab \
     $(LOCAL_PATH)/rootdir/fstab.qcom:root/fstab.qcom \
     $(LOCAL_PATH)/rootdir/fstab.qcom:recovery/root/fstab.qcom
 
@@ -79,6 +80,7 @@ PRODUCT_COPY_FILES += \
 
 # Additional sbin stuff
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/sbin/mr:root/sbin/mr \
     $(LOCAL_PATH)/rootdir/sbin/wait4tad_static:root/sbin/wait4tad_static \
     $(LOCAL_PATH)/rootdir/sbin/tad_static:root/sbin/tad_static
 
@@ -116,8 +118,8 @@ PRODUCT_PACKAGES += \
     tinymix
 
 #wireless
-PRODUCT_PACKAGES += \
-    libnetcmdiface
+#PRODUCT_PACKAGES += \
+#    libnetcmdiface
 
 # BT
 PRODUCT_PACKAGES += \
@@ -136,6 +138,13 @@ PRODUCT_PACKAGES += \
     librs_jni \
     com.android.future.usb.accessory
 
+# Crda
+PRODUCT_PACKAGES += \
+    crda \
+    linville.key.pub.pem \
+    regdbdump \
+    regulatory.bin
+
 # Live Wallpapers
 PRODUCT_PACKAGES += \
     LiveWallpapers \
@@ -149,33 +158,9 @@ PRODUCT_PACKAGES += \
 # We have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-# Audio
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.audio.fluence.mode=endfire \
-    persist.audio.handset.mic=analog \
-    persist.audio.lowlatency.rec=false \
-    af.resampler.quality=255 \
-    ro.qc.sdk.audio.fluencetype=none \
-    lpa.decode=true
-
-# Bluetooth
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qualcomm.bt.hci_transport=smd
-
-# GPS
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.gps.qmienabled=true \
-    persist.gps.qc_nlp_in_use=0 \
-    ro.gps.agps_provider=1 \
-
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
-
-# Radio and Telephony
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.ril.transmitpower=true \
-    persist.radio.add_power_save=1
 
 # lib ril
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -188,18 +173,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.semc.version.sw_variant=GENERIC \
     ro.semc.version.sw_type=user \
 
-# Do not power down SIM card when modem is sent to Low Power Mode.
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.apm_sim_not_pwdn=1
-
-# Ril sends only one RIL_UNSOL_CALL_RING, so set call_ring.multiple to false
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.call_ring.multiple=0
-
-# Extra debugging props
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.strictmode.visual=0 \
-    persist.sys.strictmode.disable=1
 
 # call dalvik heap config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
