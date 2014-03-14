@@ -24,7 +24,7 @@ persist.demo.hdmirotationlock=true
 # Audio
 persist.audio.fluence.mode=endfire
 persist.audio.vr.enable=false
-persist.audio.handset.mic=digital
+persist.audio.handset.mic=analog
 persist.audio.lowlatency.rec=false
 af.resampler.quality=255
 mpq.audio.decode=true
@@ -83,3 +83,5 @@ persist.gps.qmienabled=true
 # stirctmode
 persist.sys.strictmode.visual=0
 persist.sys.strictmode.disable=1
+
+ro.kernel.android.checkjni=0
