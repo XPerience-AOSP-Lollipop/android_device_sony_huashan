@@ -19,11 +19,15 @@ bin/ta_param_loader
 bin/ta_qmi_service
 bin/taimport
 bin/thermald
+bin/thermal-engine
 bin/time_daemon
 bin/updatemiscta
 bin/usbhub
 bin/usbhub_init
 bin/wcnss_service
+etc/firmware/cyttsp4_fw.bin
+etc/firmware/cyttsp_8064_mtp.hex
+etc/firmware/cyttsp_8960_cdp.hex
 etc/firmware/dsps.b00
 etc/firmware/dsps.b01
 etc/firmware/dsps.b02

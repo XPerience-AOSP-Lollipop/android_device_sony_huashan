@@ -23,6 +23,7 @@
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := C5302,C5303,C5306,huashan
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/sony/huashan/releasetools/ota_from_target_files
 
 TARGET_SPECIFIC_HEADER_PATH += device/sony/huashan/include
 
