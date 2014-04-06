@@ -341,21 +341,29 @@ on post-fs-data
     write /sys/devices/system/cpu/cpu1/online 1
 
     # ondemand
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
-    write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
-    write /sys/devices/system/cpu/cpufreq/ondemand/down_differential 10
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_multi_core 70
-    write /sys/devices/system/cpu/cpufreq/ondemand/down_differential_multi_core 3
-    write /sys/devices/system/cpu/cpufreq/ondemand/optimal_freq 918000
-    write /sys/devices/system/cpu/cpufreq/ondemand/sync_freq 1026000
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load 80
-    chown -h system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-    chown -h system /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
-    chown -h system /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
+#    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "ondemand"
+#    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "ondemand"
+#    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
+#    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
+#    write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
+#    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
+#    write /sys/devices/system/cpu/cpufreq/ondemand/down_differential 10
+#    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_multi_core 70
+#    write /sys/devices/system/cpu/cpufreq/ondemand/down_differential_multi_core 3
+#    write /sys/devices/system/cpu/cpufreq/ondemand/optimal_freq 918000
+#    write /sys/devices/system/cpu/cpufreq/ondemand/sync_freq 1026000
+#    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load 80
+#    chown -h system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+#    chown -h system /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
+#    chown -h system /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
+
+    # interactive
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "interactive"
+    chown -h system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+    chown -h system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+    chown -h system /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+    chown -h system /sys/devices/system/cpu/cpufreq/interactive/boostpulse
 
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 384000
