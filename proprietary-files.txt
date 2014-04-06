@@ -24,7 +24,7 @@ bin/time_daemon
 bin/updatemiscta
 bin/usbhub
 bin/usbhub_init
-bin/wcnss_service
+#bin/wcnss_service
 etc/firmware/cyttsp4_fw.bin
 etc/firmware/cyttsp_8064_mtp.hex
 etc/firmware/cyttsp_8960_cdp.hex

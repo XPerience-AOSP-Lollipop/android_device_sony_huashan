@@ -119,9 +119,9 @@ PRODUCT_PACKAGES += \
     libaudio-resampler \
     tinymix
 
-#wireless
-#PRODUCT_PACKAGES += \
-#    libnetcmdiface
+# Wifi service
+PRODUCT_PACKAGES += \
+    wcnss_service
 
 # BT
 PRODUCT_PACKAGES += \
@@ -164,23 +164,16 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
-# lib ril
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    rild.libpath=/system/lib/libril-qc-qmi-1.so
-
 # semc
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.semc.version.sw=1272-3352 \
-    ro.semc.version.sw_revision=12.1.A.0.266 \
+    ro.semc.version.sw_revision=12.1.A.1.201 \
     ro.semc.version.sw_variant=GENERIC \
     ro.semc.version.sw_type=user \
 
 
 # call dalvik heap config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
-
-# call hwui memory config
-$(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-1024-hwui-memory.mk)
 
 # Include non-opensource parts/ proprietary files
 $(call inherit-product, vendor/sony/huashan/huashan-vendor.mk)

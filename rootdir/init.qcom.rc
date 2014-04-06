@@ -106,6 +106,10 @@ on boot
     # Install exfat module to support exfat file system
     insmod /system/lib/modules/texfat.ko
 
+    # load custom kernel modules
+    insmod /system/lib/modules/cpufreq_wheatley.ko
+    insmod /system/lib/modules/sio-iosched.ko
+
     exec /system/bin/btnvtool -O
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
@@ -349,21 +353,21 @@ on post-fs-data
     write /sys/devices/system/cpu/cpufreq/ondemand/optimal_freq 918000
     write /sys/devices/system/cpu/cpufreq/ondemand/sync_freq 1026000
     write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load 80
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
+    chown -h system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+    chown -h system /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
+    chown -h system /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
 
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 384000
-    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-    chown system /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
-    chown system /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+    chown -h system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown -h system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chown -h system /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
+    chown -h system /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
     write /sys/module/msm_thermal/core_control/enabled 1
-    chown root system /sys/devices/system/cpu/mfreq
-    chmod 220 /sys/devices/system/cpu/mfreq
-    chown root system /sys/devices/system/cpu/cpu1/online
-    chmod 664 /sys/devices/system/cpu/cpu1/online
+    chown -h root.system /sys/devices/system/cpu/mfreq
+    chmod -h 220 /sys/devices/system/cpu/mfreq
+    chown -h root.system /sys/devices/system/cpu/cpu1/online
+    chmod -h 664 /sys/devices/system/cpu/cpu1/online
     # set DCVS parameters for CPU
     write /sys/module/msm_dcvs/cores/cpu0/slack_time_max_us 40000
     write /sys/module/msm_dcvs/cores/cpu0/slack_time_min_us 40000
@@ -393,15 +397,15 @@ on post-fs-data
     write /sys/module/msm_mpdecision/mp_em_rounding_point_min 10
     write /sys/module/msm_mpdecision/mp_em_rounding_point_max 85
     write /sys/module/msm_mpdecision/iowait_threshold_pct 50
-    # set permissions for the nodes needed by display on/off hook
-    chown system /sys/module/msm_dcvs/cores/cpu0/slack_time_max_us
-    chown system /sys/module/msm_dcvs/cores/cpu0/slack_time_min_us
-    chown system /sys/module/msm_mpdecision/slack_time_max_us
-    chown system /sys/module/msm_mpdecision/slack_time_min_us
-    chmod 664 /sys/module/msm_dcvs/cores/cpu0/slack_time_max_us
-    chmod 664 /sys/module/msm_dcvs/cores/cpu0/slack_time_min_us
-    chmod 664 /sys/module/msm_mpdecision/slack_time_max_us
-    chmod 664 /sys/module/msm_mpdecision/slack_time_min_us
+    #set permissions for the nodes needed by display on/off hook
+    chown -h system /sys/module/msm_dcvs/cores/cpu0/slack_time_max_us
+    chown -h system /sys/module/msm_dcvs/cores/cpu0/slack_time_min_us
+    chown -h system /sys/module/msm_mpdecision/slack_time_max_us
+    chown -h system /sys/module/msm_mpdecision/slack_time_min_us
+    chmod -h 664 /sys/module/msm_dcvs/cores/cpu0/slack_time_max_us
+    chmod -h 664 /sys/module/msm_dcvs/cores/cpu0/slack_time_min_us
+    chmod -h 664 /sys/module/msm_mpdecision/slack_time_max_us
+    chmod -h 664 /sys/module/msm_mpdecision/slack_time_min_us
 
     write /sys/devices/platform/msm_sdcc.3/idle_timeout 10
 
@@ -447,14 +451,6 @@ service rmt_storage /system/bin/rmt_storage
 
 on property:ro.boot.emmc=true
     start rmt_storage
-
-# Fast Dormancy
-service fast-dormancy /system/bin/fast-dormancy
-    class late_start
-    disabled
-
-on property:ro.semc.enable.fast_dormancy=false
-    stop fast-dormancy
 
 # Update WIFI MAC address
 service mac-update /system/bin/mac-update
@@ -647,12 +643,12 @@ service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
    disabled
 
 # bugreport is triggered by holding down volume down, volume up and power
-#service bugreport /system/bin/dumpstate -d -p -B \
-#        -o /data/data/com.android.shell/files/bugreports/bugreport
-#    class main
-#    disabled
-#    oneshot
-#    keycodes 114 115 116
+service bugreport /system/bin/dumpstate -d -p -B \
+        -o /data/data/com.android.shell/files/bugreports/bugreport
+    class main
+    disabled
+    oneshot
+    keycodes 114 115 116
 
 service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     class late_start
