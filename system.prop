@@ -57,7 +57,6 @@ ro.nfc.icon.enable=true
 ro.nfc.vendor.name=nxp
 ro.nfc.limitation.camera=false
 
-
 # GPS
 persist.gps.qmienabled=true
 
