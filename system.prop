@@ -19,7 +19,6 @@ persist.timed.enable=true
 
 # Graphics
 ro.sf.lcd_density=320
-ro.hwui.text_cache_width=2048
 
 # Audio
 persist.audio.fluence.mode=endfire
@@ -39,6 +38,9 @@ ro.telephony.call_ring.multiple=0
 persist.radio.apm_sim_not_pwdn=1
 persist.radio.add_power_save=1
 ro.ril.transmitpower=true
+telephony.lteOnGsmDevice=1
+ro.telephony.default_network=9
+ro.ril.def.preferred.network=9
 
 # Netmgrd
 ro.use_data_netmgrd=true

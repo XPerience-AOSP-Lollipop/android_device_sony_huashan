@@ -72,7 +72,6 @@ on fs
     # SEMC: Start the TrimArea Daemon and early TA-users
     class_start trimarea
     exec /sbin/wait4tad_static
-    exec /sbin/mr
     exec /system/bin/taimport
     start ta_qmi_service
 
@@ -83,7 +82,6 @@ on fs
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
-    exec /system/bin/sh /init.qcom.early_boot.sh ${ro.board.platform}
     exec /system/bin/sh /init.qcom.syspart_fixup.sh ${ro.board.platform} ${ro.serialno}
 
     # Permissions for AKM897x sensor
@@ -649,14 +647,6 @@ service system_monitor /system/bin/system_monitor
 service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
    user root
    disabled
-
-# bugreport is triggered by holding down volume down, volume up and power
-service bugreport /system/bin/dumpstate -d -p -B \
-        -o /data/data/com.android.shell/files/bugreports/bugreport
-    class main
-    disabled
-    oneshot
-    keycodes 114 115 116
 
 service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     class late_start
