@@ -174,7 +174,7 @@
 /dev/hidraw1                                     0666  system  system
 
 # NFC
-/dev/pn544                0600   nfc         nfc
+/dev/pn544                0660   nfc         nfc
 # wlan
 /dev/wcnss_wlan           0660   system     system*/
 

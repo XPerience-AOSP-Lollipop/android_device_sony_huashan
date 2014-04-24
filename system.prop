@@ -32,15 +32,21 @@ af.resampler.quality=255
 ##fluencetype can be "fluence" or "fluencepro" or "none"
 ro.qc.sdk.audio.fluencetype=none
 
+# Enable AAC 5.1 output
+media.aac_51_output_enabled=true
+
+# Hardware codecs
+qcom.hw.aac.encoder=true
+
 # RIL
 rild.libpath=/system/lib/libril-qc-qmi-1.so
 ro.telephony.call_ring.multiple=0
 persist.radio.apm_sim_not_pwdn=1
 persist.radio.add_power_save=1
 ro.ril.transmitpower=true
+telephony.lteOnCdmaDevice=0
 telephony.lteOnGsmDevice=1
 ro.telephony.default_network=9
-ro.ril.def.preferred.network=9
 
 # Netmgrd
 ro.use_data_netmgrd=true
@@ -48,14 +54,6 @@ persist.rmnet.mux=disabled
 
 # BT
 ro.qualcomm.bt.hci_transport=smd
-
-# NFC
-ro.nfc.on.default=false
-ro.nfc.se.sim.enable=true
-ro.nfc.se.smx.enable=false
-ro.nfc.icon.enable=true
-ro.nfc.vendor.name=nxp
-ro.nfc.limitation.camera=false
 
 # GPS
 persist.gps.qmienabled=true
