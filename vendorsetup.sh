@@ -1,1 +1,1 @@
-add_lunch_combo cm_huashan-eng
+add_lunch_combo slim_huashan-eng

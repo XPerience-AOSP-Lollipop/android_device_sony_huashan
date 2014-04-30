@@ -56,7 +56,7 @@ TARGET_KRAIT_BIONIC_PLDSIZE   := 64
 # Kernel information
 BOARD_KERNEL_BASE     := 0x80200000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_KERNEL_CMDLINE  := androidboot.hardware=qcom user_debug=31 androidboot.baseband=msm msm_rtb.filter=0x3F ehci-hcd.park=3 vmalloc=400M
+BOARD_KERNEL_CMDLINE  := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F androidboot.baseband=msm ehci-hcd.park=3 maxcpus=2 vmalloc=400M
 BOARD_MKBOOTIMG_ARGS  := --ramdisk_offset 0x02000000
 
 # Dumpstate
@@ -82,8 +82,7 @@ COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_CAMERA_ABI_HACK
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # GPS
-BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
-TARGET_NO_RPC := true
+TARGET_PROVIDES_GPS_LOC_API := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -138,7 +137,7 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1056964608
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2147483648
 
 BOARD_SEPOLICY_DIRS += \
-    device/sony/huashan/sepolicy
+       device/sony/huashan/sepolicy
 
 BOARD_SEPOLICY_UNION += \
     file_contexts \

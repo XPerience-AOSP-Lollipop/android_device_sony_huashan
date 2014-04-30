@@ -1,11 +1,10 @@
-From 12f9ad5d591416405f0f75697c4efc954a75e81a Mon Sep 17 00:00:00 2001
+From e299b9d43398159d06d5b5c7918df8ab27df66bc Mon Sep 17 00:00:00 2001
 From: bagyusz <phelyx92@gmail.com>
-Date: Thu, 24 Apr 2014 20:18:27 +0200
-Subject: [PATCH] [REVERT]:"display: Add support for interleaved YUY2 and YUYV
- format. Add support for interleaved HAL_PIXEL_FORMAT_YCbCr_422_I and
+Date: Sun, 27 Apr 2014 01:33:53 +0200
+Subject: [PATCH] [REVERT]:"display: Add support for interleaved YUY2 and YUYV 
+ format. Add support for interleaved HAL_PIXEL_FORMAT_YCbCr_422_I and 
  HAL_PIXEL_FORMAT_YCrCb_422_I format in display HAL.
 
-Change-Id: Ib87d9bf481c20bf6a92293dd04746719b1d928c1"
 ---
  libcopybit/copybit.cpp          | 2 --
  libgralloc/alloc_controller.cpp | 4 ----
@@ -15,7 +14,7 @@ Change-Id: Ib87d9bf481c20bf6a92293dd04746719b1d928c1"
  5 files changed, 18 deletions(-)
 
 diff --git a/libcopybit/copybit.cpp b/libcopybit/copybit.cpp
-index 905b162..ca4a08c 100644
+index 5f48e07..39d963d 100644
 --- a/libcopybit/copybit.cpp
 +++ b/libcopybit/copybit.cpp
 @@ -127,8 +127,6 @@ static int get_format(int format) {
@@ -28,7 +27,7 @@ index 905b162..ca4a08c 100644
          case HAL_PIXEL_FORMAT_YCrCb_420_SP:  return MDP_Y_CRCB_H2V2;
          case HAL_PIXEL_FORMAT_YCbCr_422_SP:  return MDP_Y_CBCR_H2V1;
 diff --git a/libgralloc/alloc_controller.cpp b/libgralloc/alloc_controller.cpp
-index 46f6f9b..d995dfb 100644
+index aa7eb6c..5f31c1a 100644
 --- a/libgralloc/alloc_controller.cpp
 +++ b/libgralloc/alloc_controller.cpp
 @@ -146,8 +146,6 @@ int AdrenoMemInfo::getStride(int width, int format)
@@ -40,7 +39,7 @@ index 46f6f9b..d995dfb 100644
                  stride = ALIGN(width, 16);
                  break;
              case HAL_PIXEL_FORMAT_YCbCr_420_SP_VENUS:
-@@ -357,8 +355,6 @@ size_t getBufferSizeAndDimensions(int width, int height, int format,
+@@ -367,8 +365,6 @@ size_t getBufferSizeAndDimensions(int width, int height, int format,
              break;
          case HAL_PIXEL_FORMAT_YCbCr_422_SP:
          case HAL_PIXEL_FORMAT_YCrCb_422_SP:
@@ -50,10 +49,10 @@ index 46f6f9b..d995dfb 100644
                  ALOGE("width is odd for the YUV422_SP format");
                  return -EINVAL;
 diff --git a/libgralloc/gralloc_priv.h b/libgralloc/gralloc_priv.h
-index 58fc898..7d3f983 100644
+index 41ae82b..2702a26 100644
 --- a/libgralloc/gralloc_priv.h
 +++ b/libgralloc/gralloc_priv.h
-@@ -104,7 +104,6 @@ enum {
+@@ -114,7 +114,6 @@ enum {
      HAL_PIXEL_FORMAT_RG_88                  = 0x10E,
      HAL_PIXEL_FORMAT_YCbCr_444_SP           = 0x10F,
      HAL_PIXEL_FORMAT_YCrCb_444_SP           = 0x110,
