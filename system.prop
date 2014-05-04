@@ -69,3 +69,5 @@ persist.service.swiqi2.enable=1
 # stirctmode
 persist.sys.strictmode.visual=0
 persist.sys.strictmode.disable=1
+
+ro.kernel.android.checkjni=0

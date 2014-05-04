@@ -34,6 +34,7 @@ TARGET_KERNEL_CONFIG := viskan_huashan_defconfig
 # Platform
 TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 TARGET_BOARD_PLATFORM := msm8960
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno320
 BOARD_VENDOR_PLATFORM := viskan
 
 # Architecture
@@ -56,11 +57,8 @@ TARGET_KRAIT_BIONIC_PLDSIZE   := 64
 # Kernel information
 BOARD_KERNEL_BASE     := 0x80200000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_KERNEL_CMDLINE  := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F androidboot.baseband=msm ehci-hcd.park=3 maxcpus=2 vmalloc=400M
+BOARD_KERNEL_CMDLINE  := androidboot.hardware=qcom user_debug=31 androidboot.baseband=msm msm_rtb.filter=0x3F ehci-hcd.park=3 vmalloc=400M
 BOARD_MKBOOTIMG_ARGS  := --ramdisk_offset 0x02000000
-
-# Dumpstate
-BOARD_LIB_DUMPSTATE := libdumpstate.sony
 
 # Wifi Config
 BOARD_HAS_QCOM_WLAN              := true
@@ -82,7 +80,8 @@ COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_CAMERA_ABI_HACK
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # GPS
-TARGET_PROVIDES_GPS_LOC_API := true
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
+TARGET_NO_RPC := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -137,33 +136,26 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1056964608
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2147483648
 
 BOARD_SEPOLICY_DIRS += \
-       device/sony/huashan/sepolicy
+    device/sony/huashan/sepolicy
 
-BOARD_SEPOLICY_UNION += \
-    file_contexts \
-    property_contexts \
-    te_macros \
-    bluetooth_loader.te \
-    bridge.te \
-    camera.te \
-    device.te \
-    dhcp.te \
-    domain.te \
-    drmserver.te \
-    file.te \
-    kickstart.te \
-    init.te \
-    mac_update.te \
-    mediaserver.te \
-    mpdecision.te \
-    netmgrd.te \
-    qmux.te \
-    rild.te \
-    rmt.te \
-    surfaceflinger.te \
-    system.te \
-    tee.te \
-    thermald.te \
-    ueventd.te \
-    wpa_supplicant.te
+BOARD_SEPOLICY_UNION := \
+       app.te \
+       bluetooth.te \
+       device.te \
+       domain.te \
+       drmserver.te \
+       file.te \
+       file_contexts \
+       hci_init.te \
+       init_shell.te \
+       keystore.te \
+       mediaserver.te \
+       kickstart.te \
+       netd.te \
+       rild.te \
+       surfaceflinger.te \
+       system.te \
+       ueventd.te \
+       vold.te \
+       wpa.te
 
